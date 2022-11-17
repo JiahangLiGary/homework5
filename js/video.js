@@ -56,19 +56,6 @@ function skipVid() {
 }
 skipButton.addEventListener("click", skipVid);
 
-//	Mute/unmute the video and update the text in the button.
-var muteButton = document.getElementById("mute");
-function muteVid() {
-  if (vid.muted) {
-    muteButton.innerHTML = "Mute";
-    vid.muted = false;
-  } else {
-    muteButton.innerHTML = "unmute";
-    vid.muted = true;
-  }
-}
-muteButton.addEventListener("click", muteVid);
-
 //	Volume slider  Change the volume based on the slider and update the volume information.
 var volSlider = document.getElementById("slider");
 var volume = document.getElementById("volume");
@@ -78,3 +65,20 @@ function setVol() {
 }
 volume.innerHTML = vid.volume * 100 + "%";
 volSlider.addEventListener("change", setVol);
+
+//	Mute/unmute the video and update the text in the button.
+var muteButton = document.getElementById("mute");
+function muteVid() {
+  if (vid.muted) {
+    muteButton.innerHTML = "Mute";
+    vid.muted = false;
+    volSlider.value = vid.volume * 100;
+    volume.innerHTML = volSlider.value + "%";
+  } else {
+    muteButton.innerHTML = "unmute";
+    vid.muted = true;
+    volSlider.value = 0;
+    volume.innerHTML = "0%";
+  }
+}
+muteButton.addEventListener("click", muteVid);
